@@ -1,23 +1,10 @@
-#!/usr/bin/ruby
-#
-# Developed by Bobby Argenbright
-#
+###
 # NTS370 - Final Project
 # University of Advancing Technology
 #
 # Purpose: Identify & gather basic static information of files
 #          Currently detects PE, ELF, JPG, and Scripts
-#
-
-begin
-  gem "bundler"
-rescue LoadError
-  system("gem install bundler")
-  Gem.clear_paths
-end
-
-require 'rubygems'
-require 'bundler/setup'
+###
 
 require 'hex_string'
 require 'digest'
@@ -28,10 +15,6 @@ require 'json'
 require 'rest-client'
 require 'mechanize'
 require 'colorize'
-
-puts '[?] File to analyze:'.cyan
-print '> '.cyan
-file = gets.chomp
 
 
 class Analysis
@@ -126,20 +109,3 @@ class Analysis
   end
 end
 
-analyze = Analysis.new
-type = analyze.identify(file)
-banner = "\n========== Analyzing #{type} ==========\n"
-puts banner.yellow
-
-case type
-  when "PE"
-    analyze.scan_pe(file)
-  when "JPG"
-    analyze.scan_jpg(file)
-  when "ELF"
-    analyze.scan_elf(file)
-  when "Script"
-    analyze.scan_script(file)
-  else
-    puts "[!] Analysis cannot complete. Filetype unknown. Exiting...".red
-end
