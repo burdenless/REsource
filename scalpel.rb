@@ -1,9 +1,7 @@
 ###
-# NTS370 - Final Project
-# University of Advancing Technology
 #
-# Purpose: Identify & gather basic static information of files
-#          Currently detects PE, ELF, JPG, and Scripts
+# Tools for dissector
+#
 ###
 
 require 'hex_string'
