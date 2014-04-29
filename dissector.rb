@@ -23,7 +23,7 @@ file = gets.chomp
 analyze = Analysis.new
 type = analyze.identify(file)
 banner = "\n========== Analyzing #{type} ==========\n"
-puts banner.yellow
+puts banner.green
 
 case type
   when "PE"
