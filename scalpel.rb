@@ -36,7 +36,11 @@ file = gets.chomp
 
 class Analysis
   def identify(file)
-    sample = File.open(file, "r")
+    begin
+      sample = File.open(file, "r")
+    rescue
+      puts "\n[!] Error accessing #{file}".red
+    end
     contents = sample.read
     hex = contents.to_hex_string
     magic = hex[0,5]
