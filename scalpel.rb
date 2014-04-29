@@ -39,7 +39,8 @@ class Analysis
     begin
       sample = File.open(file, "r")
     rescue
-      puts "\n[!] Error accessing #{file}".red
+      puts "\n[!] Error accessing #{file}. Terminating..".red
+      exit
     end
     contents = sample.read
     hex = contents.to_hex_string
@@ -56,6 +57,7 @@ class Analysis
       type = "unknown!"
     end
     puts "\n[+] Filetype: #{type}".green
+    sample.close
     return type
   end
 
@@ -100,15 +102,14 @@ class Analysis
   end
 
   def scan_script(file)
-    hashes(file)
+    hash = hashes(file)
     sample = File.open(file, 'r')
-    contents = sample.read
-    interp = contents[2,12]
-    puts "\n[*] Interpreter: #{interp}".yellow
-    vt_query(file, sha2)
+    contents = sample.readlines.first.chomp
+    puts "\n[*] Interpreter: #{contents}".yellow
+    vt_query(file, hash)
   end
 
-  def vt_query(file, sha2)
+  def vt_query(file, hash)
     apikey = '83c3e67223487e96428598086ffd7582679024acf45a361a15896bf1edafcc7c'
     contents = File.read(file)
     agent = Mechanize.new
@@ -116,7 +117,7 @@ class Analysis
     puts "\n[*] Searching file on VirusTotal...".yellow
 
     vtrequest = agent.post("https://www.virustotal.com/vtapi/v2/file/report", {
-        "resource" => "#{sha2}",
+        "resource" => "#{hash}",
         "apikey" => "#{apikey}"
     })
     sleep(5)
