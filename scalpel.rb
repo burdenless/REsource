@@ -56,24 +56,24 @@ class Analysis
   end
 
   def scan_jpg(sample)
-    hashes(sample)
+    hash = hashes(sample)
     img = EXIFR::JPEG.new(sample)
 
-    puts "\nTime the image was captured: "
+    puts "\nTime the image was captured: ".yellow
     if img.date_time != nil
-      puts "#{img.date_time}"
+      puts "#{img.date_time}".yellow
     else
       puts '[!] No Timestamp available'.red
     end
 
     meta = img.exif_data
-    puts "\nExif data: "
+    puts "\nExif data: ".yellow
     if img.exif? == 'True'
-      puts "#{meta}"
+      puts "#{meta}".yellow
     else
       puts '[!] No Exif data available'.red
     end
-    vt_query(sample, sha2)
+    vt_query(sample, hash)
   end
 
   def scan_elf(sample)
