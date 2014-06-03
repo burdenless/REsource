@@ -46,10 +46,10 @@ class Analysis
   end
 
   def hashes(contents)
-    sha256hash = Digest::SHA256.hexdigest contents
-    sha1hash = Digest::SHA1.hexdigest contents
-    md5hash = Digest::MD5.hexdigest contents
-    puts "[*]".yellow
+    sha256hash = Digest::SHA256.file(contents).hexdigest
+    sha1hash = Digest::SHA1.file(contents).hexdigest
+    md5hash = Digest::MD5.file(contents).hexdigest
+    puts "[*] Hashes".yellow
     puts "SHA256: #{sha256hash}"
     puts "SHA1: #{sha1hash}"
     puts "MD5: #{md5hash}"
@@ -57,10 +57,11 @@ class Analysis
   end
 
   def scan_pe(sample)
-    hashes(sample)
+    hash = hashes(sample)
     pe = Metasm::PE.decode_file_header(sample)
-    puts "[*] PE Header Contents:\n#{pe.decode_header}".yellow
-    vt_query(sample, sha2)
+    puts "\n[*] PE Header Contents: ".yellow
+    puts "#{pe.decode_header}"
+    vt_query(sample, hash)
   end
 
   def scan_jpg(sample)
@@ -111,8 +112,16 @@ class Analysis
         "apikey" => "#{apikey}"
     })
     sleep(5)
-    puts vtrequest.body
 
+    results = JSON.parse(vtrequest.body)
+    vt_link = results["permalink"]
+
+    if vt_link.nil?
+      print "[-] ".red
+      puts "File not found in VT database"
+    else
+      puts "Link: #{vt_link}"
+    end
   end
 end
 
