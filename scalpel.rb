@@ -36,15 +36,23 @@ class Analysis
       type = "Script"
     else
       type = "unknown!"
+      puts "\n[!] Filetype: #{type} Analysis cannot complete.".red
+      exit(0)
     end
-    puts "\n[+] Filetype: #{type}".green
+    print "\n[+]".green
+    puts " Filetype: #{type}"
     sample.close
     return type
   end
 
   def hashes(contents)
+    sha256hash = Digest::SHA256.hexdigest contents
     sha1hash = Digest::SHA1.hexdigest contents
-    puts "[*] SHA1 Digest: #{sha1hash}".yellow
+    md5hash = Digest::MD5.hexdigest contents
+    puts "[*]".yellow
+    puts "SHA256: #{sha256hash}"
+    puts "SHA1: #{sha1hash}"
+    puts "MD5: #{md5hash}"
     return sha1hash
   end
 
@@ -86,7 +94,8 @@ class Analysis
     hash = hashes(file)
     sample = File.open(file, 'r')
     contents = sample.readlines.first.chomp
-    puts "\n[*] Interpreter: #{contents}".yellow
+    print "\n[*] Interpreter: ".yellow
+    puts contents
     vt_query(file, hash)
   end
 
@@ -102,7 +111,7 @@ class Analysis
         "apikey" => "#{apikey}"
     })
     sleep(5)
-    puts vtrequest.body.yellow
+    puts vtrequest.body
 
   end
 end

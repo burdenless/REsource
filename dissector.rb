@@ -16,14 +16,15 @@ require 'rubygems'
 require 'bundler/setup'
 load 'scalpel.rb'
 
-puts '[?] File to analyze:'.cyan
+print '[?]'.cyan
+puts ' File to analyze:'
 print '> '.cyan
 file = gets.chomp
 
 analyze = Analysis.new
 type = analyze.identify(file)
 banner = "\n========== Analyzing #{type} ==========\n"
-puts banner.green
+puts banner.yellow
 
 case type
   when "PE"
