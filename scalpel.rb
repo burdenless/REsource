@@ -113,7 +113,8 @@ class Analysis
       })
       sleep(5)
     rescue
-      puts "[-] Could not connect to VirusTotal's database.. Check network connection."
+      puts "[-] Could not connect to VirusTotal's database.. Check network connection.".red
+      exit(0)
     end
 
     results = JSON.parse(vtrequest.body)

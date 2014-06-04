@@ -26,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="scalpel.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="scalpel.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scalpel.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="190" max-vertical-offset="1152">
-              <caret line="118" column="12" selection-start-line="118" selection-start-column="12" selection-end-line="118" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.62839246" vertical-offset="190" max-vertical-offset="1170">
+              <caret line="116" column="13" selection-start-line="116" selection-start-column="13" selection-end-line="116" selection-end-column="13" />
               <folding>
                 <element signature="e#223#858#0" expanded="false" />
                 <element signature="e#862#1189#0" expanded="false" />
@@ -43,10 +43,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dissector.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="dissector.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dissector.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48851773" vertical-offset="0" max-vertical-offset="958">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
               <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
               <folding />
             </state>
@@ -65,8 +65,8 @@
       <list>
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/finalproject.rb" />
-        <option value="$PROJECT_DIR$/scalpel.rb" />
         <option value="$PROJECT_DIR$/dissector.rb" />
+        <option value="$PROJECT_DIR$/scalpel.rb" />
       </list>
     </option>
   </component>
@@ -380,10 +380,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dissector.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
+          <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scalpel.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="190" max-vertical-offset="1152">
-          <caret line="118" column="12" selection-start-line="118" selection-start-column="12" selection-end-line="118" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.62839246" vertical-offset="190" max-vertical-offset="1170">
+          <caret line="116" column="13" selection-start-line="116" selection-start-column="13" selection-end-line="116" selection-end-column="13" />
           <folding>
             <element signature="e#223#858#0" expanded="false" />
             <element signature="e#862#1189#0" expanded="false" />
@@ -392,14 +400,6 @@
             <element signature="e#1866#1987#0" expanded="false" />
             <element signature="e#1991#2202#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dissector.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48851773" vertical-offset="0" max-vertical-offset="958">
-          <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
