@@ -49,7 +49,7 @@ class Analysis
     sha256hash = Digest::SHA256.file(contents).hexdigest
     sha1hash = Digest::SHA1.file(contents).hexdigest
     md5hash = Digest::MD5.file(contents).hexdigest
-    puts "[*] Hashes".yellow
+    puts "\n[*] Hashes".yellow
     puts "SHA256: #{sha256hash}"
     puts "SHA1: #{sha1hash}"
     puts "MD5: #{md5hash}"
@@ -106,12 +106,15 @@ class Analysis
     agent = Mechanize.new
 
     puts "\n[*] Searching file on VirusTotal...".yellow
-
-    vtrequest = agent.post("https://www.virustotal.com/vtapi/v2/file/report", {
-        "resource" => "#{hash}",
-        "apikey" => "#{apikey}"
-    })
-    sleep(5)
+    begin
+      vtrequest = agent.post("https://www.virustotal.com/vtapi/v2/file/report", {
+          "resource" => "#{hash}",
+          "apikey" => "#{apikey}"
+      })
+      sleep(5)
+    rescue
+      puts "[-] Could not connect to VirusTotal's database.. Check network connection."
+    end
 
     results = JSON.parse(vtrequest.body)
     vt_link = results["permalink"]
