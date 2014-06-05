@@ -105,7 +105,7 @@ class Analysis
     contents = File.read(file)
     agent = Mechanize.new
 
-    puts "\n[*] Searching file on VirusTotal...".yellow
+    puts "\n[*] Searching VirusTotal for this sample...".yellow
     begin
       vtrequest = agent.post("https://www.virustotal.com/vtapi/v2/file/report", {
           "resource" => "#{hash}",
@@ -124,7 +124,9 @@ class Analysis
       print "[-] ".red
       puts "File not found in VT database"
     else
-      puts "Link: #{vt_link}"
+      print "[+]".green
+      puts " Link:"
+      puts "#{vt_link}"
     end
   end
 end
