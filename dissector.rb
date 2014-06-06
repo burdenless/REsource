@@ -41,4 +41,4 @@ case type
 end
 
 print "\n[+]".green
-puts "Analysis complete!"
+puts " Analysis complete!"
