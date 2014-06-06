@@ -39,7 +39,7 @@ class Analysis
       exit(0)
     end
     print "\n[+]".green
-    puts " Filetype: #{type}"
+    puts " Filetype identified: #{type}"
     sample.close
     return type
   end
@@ -56,10 +56,27 @@ class Analysis
   end
 
   def scan_pe(sample)
+    ## Hashes the sample
     hash = hashes(sample)
+
+    ## Outputs PE section names
     pe = Metasm::PE.decode_file_header(sample)
-    puts "\n[*] PE Header Contents: ".yellow
+    puts "\n[*] PE Header Sections: ".yellow
     puts "#{pe.decode_header}"
+
+    ## Writes file strings to a text file
+    puts "\n[*] Acquiring strings..".yellow
+    strings = `strings #{sample}`
+    begin
+      print "[+]".green
+      puts " Output strings to #{sample}_strings.txt"
+      File.open("#{sample}_strings.txt", 'w+') {|f| f.write(strings) }
+    rescue
+      print "[-]".red
+      puts " Could not output strings to file."
+    end
+
+    ## Searches Virustotal for sample
     vt_query(sample, hash)
   end
 

@@ -39,3 +39,6 @@ case type
   else
     puts "[!] Analysis cannot complete. Filetype unknown.".red
 end
+
+print "\n[+]".green
+puts "Analysis complete!"
