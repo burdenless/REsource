@@ -64,17 +64,8 @@ class Analysis
     puts "\n[*] PE Header Sections: ".yellow
     puts "#{pe.decode_header}"
 
-    ## Writes file strings to a text file
-    puts "\n[*] Acquiring strings..".yellow
-    strings = `strings #{sample}`
-    begin
-      print "[+]".green
-      puts " Output strings to #{sample}_strings.txt"
-      File.open("#{sample}_strings.txt", 'w+') {|f| f.write(strings) }
-    rescue
-      print "[-]".red
-      puts " Could not output strings to file."
-    end
+    ## Outputs strings from sample to a file
+    strings(sample)
 
     ## Searches Virustotal for sample
     vt_query(sample, hash)
@@ -102,8 +93,15 @@ class Analysis
   end
 
   def scan_elf(sample)
+    ## Provide hashes
     hash = hashes(sample)
+
     elf = Metasm::ELF.decode_file(sample)
+
+    ## Output strings to file
+    strings(sample)
+
+    ## Query VT for sample
     vt_query(sample, hash)
   end
 
@@ -143,6 +141,20 @@ class Analysis
       print "[+]".green
       puts " Link:"
       puts "#{vt_link}"
+    end
+  end
+
+  def strings(sample)
+    ## Writes file strings to a text file
+    puts "\n[*] Acquiring strings..".yellow
+    strings = `strings #{sample}`
+    begin
+      print "[+]".green
+      puts " Output strings to #{sample}_strings.txt"
+      File.open("#{sample}_strings.txt", 'w+') {|f| f.write(strings) }
+    rescue
+      print "[-]".red
+      puts " Could not output strings to file."
     end
   end
 end
