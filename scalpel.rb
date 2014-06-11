@@ -59,10 +59,29 @@ class Analysis
     ## Hashes the sample
     hash = hashes(sample)
 
-    ## Outputs PE section names
-    pe = Metasm::PE.decode_file_header(sample)
-    puts "\n[*] PE Header Sections: ".yellow
-    puts "#{pe.decode_header}"
+    ## Open file in hex and checks the PE header for build information
+    contents = File.open(sample, "r").read.to_hex_string
+    a = contents[660,2]
+    b = contents[663,2]
+    image_file = "#{b}#{a}"
+    puts "\n[*] File Architecture: ".yellow
+    case image_file
+      when "014c"
+        machine = "i386 (32-bit x86)"
+      when "0200"
+        machine = "IA-64 (Itanium)"
+      when "8664"
+        machine = "AMD-64 (64-bit x64)"
+      else
+        machine = "Unknown"
+        print "[-]".red
+        puts " #{machine}"
+    end
+    if machine == "Unknown"
+    else
+      print "[+]".green
+      puts " #{machine}"
+    end
 
     ## Outputs strings from sample to a file
     strings(sample)
