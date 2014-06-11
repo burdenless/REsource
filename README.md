@@ -25,5 +25,5 @@ How-To
 2. Clone the repository
 3. If you do not have ruby bundler installed, install it.
 4. From within repository directory, run 'bundle install' to install required gems
-5. Add VirusTotal API key to scalpel.rb in the vt_scan() function
+5. Add VirusTotal API key to scalpel.rb in the vt_query() function
 6. Run 'ruby dissector.rb'
