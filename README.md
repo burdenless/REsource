@@ -13,10 +13,10 @@ Currently supported filetypes:
 Features
 --------
 Currently REsource will:
-- provide you with hashes of the file
-- perform some cursory analysis on the file, such as some characteristics and build information 
-- output the strings from the file into a separate txt file
-- query VirusTotal for the hash of the file and provide you with the permalink to the analysis.
+- Provide you with hashes of the file
+- Perform some cursory analysis on the file, such as some characteristics and build information 
+- Output the strings from the file into a separate txt file
+- Query VirusTotal for the hash of the file and provide you with the permalink to the analysis if the hash has been previously analyzed.
 
 
 How-To
