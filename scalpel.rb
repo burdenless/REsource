@@ -134,7 +134,7 @@ class Analysis
   end
 
   def vt_query(file, hash)
-    apikey = '83c3e67223487e96428598086ffd7582679024acf45a361a15896bf1edafcc7c'
+    apikey = '<Place VT API key here>'
     contents = File.read(file)
     agent = Mechanize.new
 
