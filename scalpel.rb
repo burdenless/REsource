@@ -72,7 +72,7 @@ class Analysis
     if test32.nil?
       if testia64.nil?
         if test64.nil?
-          build = "Unkown"
+          build = "Unknown"
         else
           build = "AMD-64 (64-bit x64)"
 	end
