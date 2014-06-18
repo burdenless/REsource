@@ -61,26 +61,35 @@ class Analysis
 
     ## Open file in hex and checks the PE header for build information
     contents = File.open(sample, "r").read.to_hex_string
-    a = contents[660,2]
-    b = contents[663,2]
-    image_file = "#{b}#{a}"
-    puts "\n[*] File Architecture: ".yellow
-    case image_file
-      when "014c"
-        machine = "i386 (32-bit x86)"
-      when "0200"
-        machine = "IA-64 (Itanium)"
-      when "8664"
-        machine = "AMD-64 (64-bit x64)"
+    win32 = "014c"
+    itanium64 = "0200"
+    winamd64 = "8664"
+
+    a = contents[600, 300]
+    test32 = a.index "4c 01"
+    testia64 = a.index "00 02"
+    test64 = a.index "8664"
+    if test32.nil?
+      if testia64.nil?
+        if test64.nil?
+          build = "Unkown"
+        else
+          build = "AMD-64 (64-bit x64)"
+	end
       else
-        machine = "Unknown"
-        print "[-]".red
-        puts " #{machine}"
+        build = "IA-64 (Itanium)"
+      end
+    else
+      build = "i386 (32-bit x86)"
     end
-    if machine == "Unknown"
+
+    puts "\n[*] File Architecture: ".yellow
+    if build == "Unknown"
+      print "[-]".red
+      puts " #{build}"
     else
       print "[+]".green
-      puts " #{machine}"
+      puts " #{build}"
     end
 
     ## Outputs strings from sample to a file
@@ -134,7 +143,13 @@ class Analysis
   end
 
   def vt_query(file, hash)
-    apikey = '<Place VT API key here>'
+    apikey = ''
+    if apikey.empty?
+      print "\n[!]".red
+      print " Please provide VisusTotal API key\n> "
+      apikey = gets.chomp
+    else
+    end
     contents = File.read(file)
     agent = Mechanize.new
 
