@@ -23,8 +23,8 @@ class Analysis
       exit
     end
     contents = sample.read
-    hex = contents.to_hex_string
-    magic = hex[0,5]
+    @hex = contents.to_hex_string
+    magic = @hex[0,5]
     if magic == "4d 5a"
       type = "PE"
     elsif magic == "ff d8"
@@ -56,19 +56,22 @@ class Analysis
   end
 
   def scan_pe(sample)
-    ## Hashes the sample
+    ## Hashes the sample ##
     hash = hashes(sample)
 
-    ## Open file in hex and checks the PE header for build information
-    contents = File.open(sample, "r").read.to_hex_string
+    ## Set Image File Header values ##
     win32 = "014c"
     itanium64 = "0200"
     winamd64 = "8664"
 
-    a = contents[600, 300]
-    test32 = a.index "4c 01"
-    testia64 = a.index "00 02"
-    test64 = a.index "8664"
+    ## Identify File Header relative to start of PE header ##
+    offset = @hex.index "50 45 00 00"
+    offset = offset + 12
+    a = @hex[offset, 5]
+    
+    test32 = a.index('4c 01')
+    testia64 = a.index('00 02')
+    test64 = a.index ('86 64')
     if test32.nil?
       if testia64.nil?
         if test64.nil?
@@ -143,7 +146,7 @@ class Analysis
   end
 
   def vt_query(file, hash)
-    apikey = ''
+    apikey = '83c3e67223487e96428598086ffd7582679024acf45a361a15896bf1edafcc7c'
     if apikey.empty?
       print "\n[!]".red
       print " Please provide VisusTotal API key\n> "
