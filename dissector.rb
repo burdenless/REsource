@@ -18,7 +18,7 @@ load 'scalpel.rb'
 
 print '[?]'.yellow
 puts ' File to analyze:'
-print '> '.yellow
+print '> '
 file = gets.chomp
 
 analyze = Analysis.new
