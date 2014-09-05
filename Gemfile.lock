@@ -28,6 +28,7 @@ GEM
     ntlm-http (0.1.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    trollop (2.0)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.6)
@@ -47,4 +48,5 @@ DEPENDENCIES
   mechanize
   metasm
   rest-client
+  trollop
   virustotal

@@ -100,6 +100,8 @@ class Analysis
 
     ## Searches Virustotal for sample
     vt_query(sample, hash)
+
+
   end
 
   def scan_jpg(sample)

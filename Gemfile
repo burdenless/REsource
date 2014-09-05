@@ -9,4 +9,5 @@ gem 'json'
 gem 'rest-client'
 gem 'mechanize'
 gem 'colorize'
+gem 'trollop'
 # gem "rails"

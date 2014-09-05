@@ -3,7 +3,6 @@
 # Tool for initial malware triage
 # developed by: Pendrak0n
 #
-###
 
 begin
   gem "bundler"
@@ -14,15 +13,27 @@ end
 
 require 'rubygems'
 require 'bundler/setup'
+require 'trollop'
 load 'scalpel.rb'
 
-print '[?]'.yellow
-puts ' File to analyze:'
-print '> '
-file = gets.chomp
+opts = Trollop::options do
+  opt :file, "File to analyze", :type => :string
+  opt :recurse, "Toggle recursive analysis on a folder", :default => false
+end
 
-analyze = Analysis.new
-type = analyze.identify(file)
+if opts[:recurse] == true
+  p "Dummy procedure until recursivity is built"
+  exit
+elsif opts[:file_given] == true
+  file = opts[:file]
+  analyze = Analysis.new
+  type = analyze.identify(file)
+else  
+  help = Trollop::Parser.new
+  help.parse(opts)
+  help.educate
+  exit
+end
 
 banner = "\n========== Analyzing #{type} =========="
 puts banner.yellow
