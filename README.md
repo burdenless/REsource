@@ -24,7 +24,7 @@ How-To
 1. Install ruby using RVM, Apt, Yum, or whichever way you choose
 2. Clone the repository
 3. Add VirusTotal API key to scalpel.rb in the vt_query() function
-4. Run './dissector.rb'
+4. Run 'ruby dissector.rb'
 
 
 Syntax
