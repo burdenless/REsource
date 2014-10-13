@@ -189,8 +189,8 @@ class Analysis
     strings = `strings #{sample}`
     begin
       print "[+]".green
-      puts " Output strings to #{sample}_strings.txt"
-      File.open("#{sample}_strings.txt", 'w+') {|f| f.write(strings) }
+      puts " Output strings to strings/#{sample}_strings.txt"
+      File.open("samples/#{sample}_strings.txt", 'w+') {|f| f.write(strings) }
     rescue
       print "[-]".red
       puts " Could not output strings to file."

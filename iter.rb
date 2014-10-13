@@ -13,7 +13,7 @@ class Recurse
     if Dir.exists?(folder)
       print "[*]".yellow
       puts " Recursively scanning #{folder}"
-      items = Dir["#{folder}/*"]
+      items = Dir["#{folder}*"]
       scan_all(items)
       exit
     else
