@@ -29,4 +29,4 @@ How-To
 
 Syntax
 -------
-./dissector.rb [-r] -f [file to analyze (dir path if -r toggled)]
+./dissector.rb [-r] -f [malicious.exe | path/to/malware/]
