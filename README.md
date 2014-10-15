@@ -27,4 +27,4 @@ How-To
 
 Syntax
 -------
-./dissector.rb [-r] -f [malicious.exe | path/to/malware/]
+./dissector.rb [-d] -f [malicious.exe | path/to/malware/]
