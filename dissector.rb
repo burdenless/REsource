@@ -17,7 +17,6 @@ require 'rubygems'
 require 'bundler/setup'
 require 'trollop'
 load 'scalpel.rb'
-load 'iter.rb'
 
 # Declare CLI arguments
 opts = Trollop::options do
