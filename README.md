@@ -1,8 +1,6 @@
 REsource
 ========
 
-Ruby scripts for static analysis of malicous files. 
-
 Currently supported filetypes:
 * PE (32-bit/64-bit)
 * ELF
