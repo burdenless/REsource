@@ -22,23 +22,41 @@ load 'iter.rb'
 # Declare CLI arguments
 opts = Trollop::options do
   opt :file, "File to analyze", :type => :string
-  opt :recurse, "Toggle recursive analysis on a folder", :default => false
+  opt :dir, "Toggle iterative directory analysis", :default => false
 end
 
+def dirid(folder)
+    # Identify given folder and test if it exists
+    if Dir.exists?(folder)
+      print "[*]".yellow
+      puts " Recursively scanning #{folder}"
+      items = Dir["#{folder}*"]
+      @files = items
+    else
+      print "[!]".red
+      puts " Could not access #{folder}"
+      exit
+    end
+  end
+
+
 # Initializes analysis of files based on filetype
-def analysis_init(type)
+def analysis_init(type, filename)
+  print "\n[*]".yellow
+  puts " Analyzing #{filename}"
+  
   banner = "\n========== Analyzing #{type} =========="
   puts banner.yellow
 
   case type
     when "PE"
-      @analyze.scan_pe(@file)
+      @analyze.scan_pe(filename)
     when "JPG"
-      @analyze.scan_jpg(@file)
+      @analyze.scan_jpg(filename)
     when "ELF"
-      @analyze.scan_elf(@file)
+      @analyze.scan_elf(filename)
     when "Script"
-      @analyze.scan_script(@file)
+      @analyze.scan_script(filename)
     else
       puts "[!] Analysis cannot complete. Filetype unknown.".red
   end
@@ -47,19 +65,28 @@ def analysis_init(type)
   puts " Analysis complete!"
 end
 
+# Initialize Analysis
+@analyze = Analysis.new
+
 # Parses CLI arguments
-if opts[:recurse]
+if opts[:dir]
   puts "DEV NOTE: recursive scanning is in beta".yellow
   folder = opts[:file]
-  recurse = Recurse.new
-  recurse.dirid(folder)
+  #recurse = Recurse.new
+  dirid(folder)
+  @files.each do |file|
+    if File.directory?(file)
+	print "[*]".yellow
+	puts " #{file} is a directory.. Skipped!"
+    else
+    	ftype = @analyze.identify(file)
+    	analysis_init(ftype, file)
+    end
+  end
 elsif opts[:file_given]
-  @file = opts[:file]
-  print "\n[*]".yellow
-  puts " Analyzing #{@file}"
-  @analyze = Analysis.new
-  ftype = @analyze.identify(@file)
-  analysis_init(ftype)
+  file = opts[:file]
+  ftype = @analyze.identify(file)
+  analysis_init(ftype, file)
 else  
   help = Trollop::Parser.new
   help.parse(opts)

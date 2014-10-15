@@ -177,10 +177,15 @@ class Analysis
       print "[-] ".red
       puts "File not found in VT database"
     else
+      total = results["total"]
+      detected = results["positives"] 
       print "[+]".green
-      puts " Link:"
-      puts "#{vt_link}"
+      puts " Link: #{vt_link}"
+      print "[+]".green
+      puts " Detection Ratio: #{detected}/#{total}"
     end
+
+     
   end
 
   def strings(sample)
