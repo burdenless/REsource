@@ -1,9 +1,12 @@
 #!/usr/bin/ruby
+##
 #
 # Tool for initial malware triage
-# developed by: Pendrak0n
+# Developer: Y0xda
 #
 ##
+
+####################### Required #############################
 
 # Dependency check
 begin
@@ -16,7 +19,7 @@ end
 require 'rubygems'
 require 'bundler/setup'
 require 'trollop'
-load 'scalpel.rb'
+load 'modules.rb'
 
 # Declare CLI arguments
 opts = Trollop::options do
@@ -25,38 +28,43 @@ opts = Trollop::options do
 end
 
 
+####################### Main Functions ###############################
+
+
 def dirid(folder)
-    # Identify given folder and test if it exists
-    if Dir.exists?(folder)
-      print "[*]".yellow
-      puts " Recursively scanning #{folder}"
-      items = Dir["#{folder}*"]
-      @files = items
-    else
-      print "[!]".red
-      puts " Could not access #{folder}"
-      exit
-    end
+  # Identify given folder and test if it exists
+  if Dir.exists?(folder)
+    print "[*]".yellow
+    puts " Recursively scanning #{folder}"
+    items = Dir["#{folder}*"]
+    @files = items
+  else
+    print "[!]".red
+    puts " Could not access #{folder}"
+    exit
   end
+end
 
 
 # Initializes analysis of files based on filetype
-def analysis_init(type, filename)
+def analysis_init(type, malz)
   print "\n[*]".yellow
-  puts " Analyzing #{filename}"
+  puts " Analyzing #{malz}"
   
   banner = "\n========== Analyzing #{type} =========="
   puts banner.yellow
 
   case type
     when "PE"
-      @analyze.scan_pe(filename)
+      @analyze.scan_pe(malz)
     when "JPG"
-      @analyze.scan_jpg(filename)
+      @analyze.scan_jpg(malz)
     when "ELF"
-      @analyze.scan_elf(filename)
+      @analyze.scan_elf(malz)
     when "Script"
-      @analyze.scan_script(filename)
+      @analyze.scan_script(malz)
+    when "PDF"
+      @analyze.scan_pdf(malz)
     else
       puts "[!] Analysis cannot complete. Filetype unknown.".red
   end
@@ -64,6 +72,10 @@ def analysis_init(type, filename)
   print "\n[+]".green
   puts " Analysis complete!"
 end
+
+
+######################### ARG Parsing #########################
+
 
 # Initialize Analysis
 @analyze = Analysis.new
@@ -92,3 +104,4 @@ else
   help.educate
   exit
 end
+  

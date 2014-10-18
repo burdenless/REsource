@@ -33,6 +33,8 @@ class Analysis
       type = "ELF"
     elsif magic == "23 21"
       type = "Script"
+    elsif magic == "25 50"
+      type = "PDF"
     else
       type = "unknown!"
       puts "\n[!] Filetype: #{type} Analysis cannot complete.".red
