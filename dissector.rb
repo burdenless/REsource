@@ -24,6 +24,7 @@ opts = Trollop::options do
   opt :dir, "Toggle iterative directory analysis", :default => false
 end
 
+
 def dirid(folder)
     # Identify given folder and test if it exists
     if Dir.exists?(folder)
@@ -69,7 +70,6 @@ end
 
 # Parses CLI arguments
 if opts[:dir]
-  puts "DEV NOTE: recursive scanning is in beta".yellow
   folder = opts[:file]
   #recurse = Recurse.new
   dirid(folder)
