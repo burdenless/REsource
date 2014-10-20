@@ -12,9 +12,9 @@ Features
 --------
 Currently REsource will:
 - Provide you with hashes of the file
-- Perform some cursory analysis on the file, such as some characteristics and build information 
+- Parse the header
 - Output the strings from the file into a separate txt file
-- Query VirusTotal for the hash of the file and provide you with the permalink to the analysis if the hash has been previously analyzed.
+- Query VirusTotal for the SHA1 hash
 
 
 How-To
