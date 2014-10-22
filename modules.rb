@@ -40,11 +40,11 @@ class Analysis
       puts "\n[!] Filetype: #{type} Analysis cannot complete.".red
       exit(0)
     end
-    print "\n[+]".green
-    puts " Filetype identified: #{type}"
     sample.close
     return type
   end
+
+######################### Hashing Module ########################
 
   def hashes(contents)
     sha256hash = Digest::SHA256.file(contents).hexdigest
@@ -56,6 +56,8 @@ class Analysis
     puts "MD5: #{md5hash}"
     return sha1hash
   end
+
+######################### PE Module ########################
 
   def scan_pe(sample)
     ## Hashes the sample ##
@@ -102,9 +104,9 @@ class Analysis
 
     ## Searches Virustotal for sample
     vt_query(sample, hash)
-
-
   end
+
+######################### JPG Module ########################
 
   def scan_jpg(sample)
     hash = hashes(sample)
@@ -140,6 +142,8 @@ class Analysis
     vt_query(sample, hash)
   end
 
+######################### Script Module ########################
+
   def scan_script(file)
     hash = hashes(file)
     sample = File.open(file, 'r')
@@ -149,8 +153,10 @@ class Analysis
     vt_query(file, hash)
   end
 
+######################### VirusTotal Query Module ########################
+
   def vt_query(file, hash)
-    apikey = '' # VirusTotal API key goes here
+    apikey = '83c3e67223487e96428598086ffd7582679024acf45a361a15896bf1edafcc7c' # VirusTotal API key goes here
     if apikey.empty?
       print "\n[!]".red
       print " Please provide VisusTotal API key\n> "
@@ -186,21 +192,32 @@ class Analysis
       print "[+]".green
       puts " Detection Ratio: #{detected}/#{total}"
     end
-
-     
   end
+
+######################### Strings Module ########################
 
   def strings(sample)
     ## Writes file strings to a text file
     puts "\n[*] Acquiring strings..".yellow
     strings = `strings #{sample}`
+    
     begin
       print "[+]".green
       puts " Output strings to strings/#{sample}_strings.txt"
-      File.open("samples/#{sample}_strings.txt", 'w+') {|f| f.write(strings) }
+      
+      if Dir.exists?("strings")
+	Dir.chdir('strings') 
+      else
+	Dir.mkdir('strings')
+	Dir.chdir('strings')
+      end
+
+      File.open("#{sample}_strings.txt", 'w+') {|f| f.write(strings)}
+      Dir.chdir('../')
     rescue
       print "[-]".red
       puts " Could not output strings to file."
+    
     end
   end
 end
