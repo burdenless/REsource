@@ -22,9 +22,9 @@ How-To
 1. Install ruby using RVM, Apt, Yum, or whichever way you choose
 2. Clone the repository
 3. Add VirusTotal API key to scalpel.rb in the vt_query() function
-4. Run dissector.rb
+4. Run resource.rb
 
 
 Syntax
 -------
-./dissector.rb [-d] -f [malicious.exe | path/to/malware/]
+./resource.rb [-d] -f [malicious.exe | path/to/malware/]
