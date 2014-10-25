@@ -1,6 +1,6 @@
 ###
 #
-# Tools for dissector
+# R.E.source Modules
 #
 ###
 
@@ -44,7 +44,9 @@ class Analysis
     return type
   end
 
+
 ######################### Hashing Module ########################
+
 
   def hashes(contents)
     sha256hash = Digest::SHA256.file(contents).hexdigest
@@ -57,7 +59,9 @@ class Analysis
     return sha1hash
   end
 
+
 ######################### PE Module ########################
+
 
   def scan_pe(sample)
     ## Hashes the sample ##
@@ -106,7 +110,9 @@ class Analysis
     vt_query(sample, hash)
   end
 
+
 ######################### JPG Module ########################
+
 
   def scan_jpg(sample)
     hash = hashes(sample)
@@ -142,7 +148,9 @@ class Analysis
     vt_query(sample, hash)
   end
 
+
 ######################### Script Module ########################
+
 
   def scan_script(file)
     hash = hashes(file)
@@ -153,10 +161,12 @@ class Analysis
     vt_query(file, hash)
   end
 
+
 ######################### VirusTotal Query Module ########################
 
+
   def vt_query(file, hash)
-    apikey = '83c3e67223487e96428598086ffd7582679024acf45a361a15896bf1edafcc7c' # VirusTotal API key goes here
+    apikey = '' # VirusTotal API key goes here
     if apikey.empty?
       print "\n[!]".red
       print " Please provide VisusTotal API key\n> "
@@ -194,7 +204,9 @@ class Analysis
     end
   end
 
+
 ######################### Strings Module ########################
+
 
   def strings(sample)
     ## Writes file strings to a text file
@@ -206,12 +218,11 @@ class Analysis
       puts " Output strings to strings/#{sample}_strings.txt"
       
       if Dir.exists?("strings")
-	Dir.chdir('strings') 
       else
 	Dir.mkdir('strings')
-	Dir.chdir('strings')
       end
 
+      Dir.chdir('strings')
       File.open("#{sample}_strings.txt", 'w+') {|f| f.write(strings)}
       Dir.chdir('../')
     rescue
