@@ -127,6 +127,9 @@ class Analysis
     vt_query(sample, hash)
   end
 
+######################### ELF Module ########################
+
+
   def scan_elf(sample)
     ## Provide hashes
     hash = hashes(sample)
