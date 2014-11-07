@@ -11,7 +11,7 @@ require 'exifr'
 require 'colorize'
 require_relative 'vtquery'
 
-VT = VT.new()
+VTotal = VT.new
 
 class Analysis
   def identify(file)
@@ -97,7 +97,7 @@ class Analysis
     strings(sample)
 
     ## Searches Virustotal for sample
-    VT::vtquery(sample, hash)
+    VTotal::vtquery(sample, hash)
   end
 
 
@@ -137,7 +137,7 @@ class Analysis
     strings(sample)
 
     ## Query VT for sample
-    VT::vtquery(sample, hash)
+    VTotal::vtquery(sample, hash)
   end
 
 
@@ -152,7 +152,7 @@ class Analysis
     contents = sample.readlines.first.chomp
     print "\n[*] Interpreter: ".yellow
     puts contents
-    VT::vtquery(file, hash)
+    VTotal::vtquery(file, hash)
   end
 
 
