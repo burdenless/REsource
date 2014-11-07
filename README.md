@@ -21,8 +21,8 @@ How-To
 -------
 1. Install ruby using RVM, Apt, Yum, or whichever way you choose
 2. Clone the repository
-3. Add VirusTotal API key to modules.rb in the vt_query() function
-4. Run resource.rb
+3. Add VirusTotal API key to vt.key file in the REsource/bin directory
+4. Run resource.rb (will prompt you to run bundle install to install missing dependencies)
 
 
 Syntax

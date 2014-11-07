@@ -1,0 +1,7 @@
+
+========== Analyzing PE ==========
+[*] File Architecture: i386 (32-bit x86)
+[*] Output strings to strings/MaxRootkit_2011_1.exe_strings.txt
+[+] Link: https://www.virustotal.com/file/24a0f04756da15a2f93618c1be2cf4bef437061d402b007794488f56e77fea53/analysis/1410442999/
+[+] Detection Ratio: 49/55
+[+] Analysis complete!

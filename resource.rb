@@ -19,7 +19,7 @@ end
 require 'rubygems'
 require 'bundler/setup'
 require 'trollop'
-load 'modules.rb'
+load 'bin/modules.rb'
 
 # Declare CLI arguments
 opts = Trollop::options do
@@ -48,11 +48,9 @@ end
 
 # Initializes analysis of files based on filetype
 def analysis_init(type, malz)
-  print "\n[*]".yellow
-  puts " Analyzing #{malz}"
-  
   banner = "\n========== Analyzing #{type} =========="
   puts banner.yellow
+  File.open("reports/#{malz}.txt", "w+") do |f1| f1.write("#{banner}") end
 
   case type
     when "PE"
@@ -68,11 +66,8 @@ def analysis_init(type, malz)
     else
       puts "[!] Analysis cannot complete. Filetype unknown.".red
   end
-
-  print "\n[+]".green
-  puts " Analysis complete!"
+  File.open("reports/#{malz}.txt", "a") do |f1| f1.write("\n[+] Analysis complete!\n") end
 end
-
 
 ######################### ARG Parsing #########################
 
@@ -83,21 +78,35 @@ end
 # Parses CLI arguments
 if opts[:dir]
   folder = opts[:file]
-  #recurse = Recurse.new
   dirid(folder)
   @files.each do |file|
     if File.directory?(file)
-	print "[*]".yellow
-	puts " #{file} is a directory.. Skipped!"
+      print "[*]".yellow
+      puts " #{file} is a directory.. Skipped!"
     else
-    	ftype = @analyze.identify(file)
-    	analysis_init(ftype, file)
+      ftype = @analyze.identify(file)
+      scanthr = Thread.new { analysis_init(ftype, file) }
+      scanthr.join
+      while scanthr.alive? do
+        @analyze.progress(file)
+      end
     end
   end
 elsif opts[:file_given]
   file = opts[:file]
   ftype = @analyze.identify(file)
-  analysis_init(ftype, file)
+  scanthr = Thread.new { analysis_init(ftype, file) }
+  while scanthr.alive? do
+    data = %w[ - \\ | / - \\ | / ]
+    data.each { |s|
+      sleep(0.2)
+      print "\r[%s] Analyzing #{file}" % s
+      }
+      print
+    end
+    puts "\r[+] Finished analyzing #{file}!"
+  print "\n[*]".green
+  puts " Check reports/#{file}.txt for analysis details"
 else  
   help = Trollop::Parser.new
   help.parse(opts)
