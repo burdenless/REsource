@@ -1,27 +1,21 @@
 # VirusTotal module
 
-require 'mechanize'
 require 'json'
 require 'rest-client'
 require 'colorize'
 
 class VT
   def vtquery(file, hash)
-    if File.exists?('bin/vt.key')
-      apikey = File.read('bin/vt.key').chomp
-    else
+    if File.zero?('bin/vt.key')
       print "\n[!]".red
-      print " Please provide VisusTotal API key\n> "
-      apikey = gets.chomp
+      print " Please place VisusTotal API key in bin/vt.key\n"
+      exit(0)
+    else
+      apikey = File.read('bin/vt.key').chomp
     end
-    contents = File.read(file)
-    agent = Mechanize.new
 
     begin
-      vtrequest = agent.post("https://www.virustotal.com/vtapi/v2/file/report", {
-          "resource" => "#{hash}",
-          "apikey" => "#{apikey}"
-      })
+      vtrequest = RestClient.post "https://www.virustotal.com/vtapi/v2/file/report", :resource => "#{hash}", :apikey => "#{apikey}"
       sleep(5)
     rescue
       puts "[-] Could not connect to VirusTotal's database.. Check network connection.".red
