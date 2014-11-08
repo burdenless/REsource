@@ -30,6 +30,14 @@ end
 
 ####################### Main Functions ###############################
 
+# Display banner
+puts <<Banner.green
+ _ __ ___   ___  ___  _   _ _ __ ___ ___
+| '__/ _ \\ / __|/ _ \\| | | | '__/ __/ _ \\
+| |_|  __/_\\__ \\ (_) | |_| | | | (_|  __/
+|_(_)\\___(_)___/\\___/ \\__,_|_|  \\___\\___|
+Banner
+
 
 def dirid(folder)
   # Identify given folder and test if it exists
