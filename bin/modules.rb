@@ -51,6 +51,7 @@ class Analysis
     sha256hash = Digest::SHA256.file(contents).hexdigest
     sha1hash = Digest::SHA1.file(contents).hexdigest
     md5hash = Digest::MD5.file(contents).hexdigest
+    File.open("reports/#{contents}.txt", "a") do |f1| f1.write("\r\n[*] Hashes:\nSHA256 - #{sha256hash}\nSHA1 - #{sha1hash}\nMD5 - #{md5hash}\r\n") end
     return sha256hash
   end
 
