@@ -17,6 +17,8 @@ class Analysis
   def identify(file)
     begin
       sample = File.open(file, "r")
+      @sample_name = File.basename("#{file}")
+      puts "Analyzing #{@sample_name}.."
     rescue
       puts "\n[!] Error accessing #{file}. Terminating..".red
       exit
@@ -51,7 +53,7 @@ class Analysis
     sha256hash = Digest::SHA256.file(contents).hexdigest
     sha1hash = Digest::SHA1.file(contents).hexdigest
     md5hash = Digest::MD5.file(contents).hexdigest
-    File.open("reports/#{contents}.txt", "a") do |f1| f1.write("\r\n[*] Hashes:\nSHA256 - #{sha256hash}\nSHA1 - #{sha1hash}\nMD5 - #{md5hash}\r\n") end
+    File.open("reports/#{@sample_name}.txt", "a") do |f1| f1.write("\r\n[*] Hashes:\nSHA256 - #{sha256hash}\nSHA1 - #{sha1hash}\nMD5 - #{md5hash}\r\n") end
     return sha256hash
   end
 
@@ -92,7 +94,7 @@ class Analysis
       build = "i386 (32-bit x86)"
     end
 
-    File.open("reports/#{sample}.txt", "a") do |f1|  f1.write("\n[*] File Architecture: #{build}") end
+    File.open("reports/#{@sample_name}.txt", "a") do |f1|  f1.write("\n[*] File Architecture: #{build}") end
 
     ## Outputs strings from sample to a file
     strings(sample)
@@ -174,9 +176,9 @@ class Analysis
 	Dir.mkdir('strings')
       end
       Dir.chdir('strings')
-      File.open("#{sample}_strings.txt", 'w+') {|f| f.write(strings)}
+      File.open("#{@sample_name}_strings.txt", 'w+') {|f| f.write(strings)}
       Dir.chdir('../')
-      File.open("reports/#{sample}.txt", "a") do |f1| f1.write("\n[*] Output strings to strings/#{sample}_strings.txt") end
+      File.open("reports/#{@sample_name}.txt", "a") do |f1| f1.write("\n[*] Output strings to strings/#{sample}_strings.txt\n") end
     rescue
       print "[-]".red
       puts " Could not output strings to file."

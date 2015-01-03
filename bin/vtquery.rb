@@ -6,6 +6,7 @@ require 'colorize'
 
 class VT
   def vtquery(file, hash)
+    @sample_name = File.basename("#{file}")  
     if File.zero?('bin/vt.key')
       print "\n[!]".red
       print " Please place VisusTotal API key in bin/vt.key\n"
@@ -26,12 +27,12 @@ class VT
     vt_link = results["permalink"]
 
     if vt_link.nil?
-      File.open("reports/#{file}.txt", "a") do |f1| f1.write("\n[-] File not found in VT database") end
+      File.open("reports/#{@sample_name}.txt", "a") do |f1| f1.write("\n[-] File not found in VT database") end
     else
       total = results["total"]
       detected = results["positives"]
-      File.open("reports/#{file}.txt", "a") do |f1| f1.write("\n[+] Link: #{vt_link}") end
-      File.open("reports/#{file}.txt", "a") do |f1| f1.write("\n[+] Detection Ratio: #{detected}/#{total}") end
+      File.open("reports/#{@sample_name}.txt", "a") do |f1| f1.write("\n[+] Link: #{vt_link}") end
+      File.open("reports/#{@sample_name}.txt", "a") do |f1| f1.write("\n[+] Detection Ratio: #{detected}/#{total}") end
     end
   end  
 end

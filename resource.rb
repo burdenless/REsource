@@ -58,7 +58,8 @@ end
 def analysis_init(type, malz)
   banner = "\n========== Analyzing #{type} =========="
   puts banner.yellow
-  File.open("reports/#{malz}.txt", "w+") do |f1| f1.write("#{banner}") end
+  @filename = File.basename(malz)  
+  File.open("reports/#{@filename}.txt", "w+") do |f1| f1.write("#{banner}") end
 
   case type
     when "PE"
@@ -74,7 +75,7 @@ def analysis_init(type, malz)
     else
       puts "[!] Analysis cannot complete. Filetype unknown.".red
   end
-  File.open("reports/#{malz}.txt", "a") do |f1| f1.write("\n[+] Analysis complete!\n") end
+  File.open("reports/#{@filename}.txt", "a") do |f1| f1.write("\n[+] Analysis complete!\n") end
 end
 
 ######################### ARG Parsing #########################
@@ -83,7 +84,7 @@ end
 # Initialize Analysis
 @analyze = Analysis.new
 
-# Parses CLI arguments
+# Parse CLI arguments
 if opts[:dir]
   folder = opts[:file]
   dirid(folder)
@@ -93,11 +94,16 @@ if opts[:dir]
       puts " #{file} is a directory.. Skipped!"
     else
       ftype = @analyze.identify(file)
-      scanthr = Thread.new { analysis_init(ftype, file) }
-      scanthr.join
+      scanthr = Thread.new{analysis_init(ftype, file)}
       while scanthr.alive? do
-        @analyze.progress(file)
+        #@analyze.progress(file)  -- Future modularization of progress tracking
+	data = %w[ - \\ | / - \\ | / ]
+    	data.each { |s|
+      	sleep(0.2)
+      	print "\r[%s] Analyzing #{file}" % s
+      	}
       end
+      puts "\r[+] Finished analyzing #{file}!"
     end
   end
 elsif opts[:file_given]
@@ -108,13 +114,13 @@ elsif opts[:file_given]
     data = %w[ - \\ | / - \\ | / ]
     data.each { |s|
       sleep(0.2)
-      print "\r[%s] Analyzing #{file}" % s
+      print "\r[%s] Analyzing #{@filename}" % s
       }
       print
     end
-    puts "\r[+] Finished analyzing #{file}!"
+    puts "\r[+] Finished analyzing #{@filename}!"
   print "\n[*]".green
-  puts " Check reports/#{file}.txt for analysis details"
+  puts " Check reports/#{@filename}.txt for analysis details"
 else  
   help = Trollop::Parser.new
   help.parse(opts)

@@ -1,0 +1,12 @@
+
+========== Analyzing PE ==========
+[*] Hashes:
+SHA256 - 24a0f04756da15a2f93618c1be2cf4bef437061d402b007794488f56e77fea53
+SHA1 - 65136d6a4cbafad0741c35e892ab07d0910b33f0
+MD5 - 392ddf0d2ee5049da11afa4668e9c98f
+
+[*] File Architecture: i386 (32-bit x86)
+[*] Output strings to strings//home/remnux/Samples/MaxRootkit_2011_1.exe_strings.txt
+[+] Link: https://www.virustotal.com/file/24a0f04756da15a2f93618c1be2cf4bef437061d402b007794488f56e77fea53/analysis/1420186357/
+[+] Detection Ratio: 49/56
+[+] Analysis complete!
