@@ -10,6 +10,7 @@ require 'metasm'
 require 'exifr'
 require 'colorize'
 require_relative 'vtquery'
+require_relative 'pe'
 
 VTotal = VT.new
 
@@ -98,6 +99,9 @@ class Analysis
 
     ## Outputs strings from sample to a file
     strings(sample)
+
+    ## Call PEDumper module
+    pedumper(sample)
 
     ## Searches Virustotal for sample
     VTotal::vtquery(sample, hash)

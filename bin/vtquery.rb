@@ -19,8 +19,8 @@ class VT
       vtrequest = RestClient.post "https://www.virustotal.com/vtapi/v2/file/report", :resource => "#{hash}", :apikey => "#{apikey}"
       sleep(5)
     rescue
-      puts "[-] Could not connect to VirusTotal's database.. Check network connection.".red
-      exit(0)
+      puts "\n[-] Could not connect to VirusTotal's database.. Check network connection.".red
+      return
     end
 
     results = JSON.parse(vtrequest.body)

@@ -56,7 +56,9 @@ end
 
 # Initializes analysis of files based on filetype
 def analysis_init(type, malz)
-  banner = "\n========== Analyzing #{type} =========="
+  banner = <<-banner
++==== Analyzing #{type} ====+
+banner
   puts banner.yellow
   @filename = File.basename(malz)  
   File.open("reports/#{@filename}.txt", "w+") do |f1| f1.write("#{banner}") end
