@@ -25,11 +25,11 @@ packban
 		File.open("reports/#{name}.txt", "a") do |f1| f1.write("Error. Could not get compiler/packer information.") end
 	end
 
-	### Parse IAT ###
+	### Parse Sections ###
 	begin
 		data = pe.sections(fi)
-		iat = data.to_json
-		parsed = JSON.parse(iat, :create_additions => true)
+		sections = data.to_json
+		parsed = JSON.parse(sections, :create_additions => true)
                 secban = <<-secban
 
 +-----------------+
@@ -49,6 +49,36 @@ secban
 		output = 'Error. Could not parse IAT'
 	end
 	File.open("reports/#{name}.txt", "a") do |f1| f1.write(output) end
+
+	### Get Imports ###
+
+        iatban = <<-iatban
+
++----------------+
+|    Imports     |
++----------------+
+iatban
+	#begin
+		data = pe.imports(fi)		
+		imports = data.to_json
+                parsed = JSON.parse(imports, :create_additions => true)
+                count = 0
+                output = ''
+		parcount = 0
+                while count < parsed.length
+                        par = parsed[count]
+                        count += 1
+			puts par['module_name']
+			while parcount < par.length
+				puts par[parcount]
+				parcount +=1
+			end
+			parcount = 0
+	  	end
+	#rescue
+	#	puts 'error'
+	#end
+
 end
 
 
