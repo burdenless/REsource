@@ -1,0 +1,24 @@
++==== Analyzing PE ====+
+
+[*] Hashes:
+SHA256 - d0f7018d02e70fabbe0e64e92c7dc9b8e0c748326668732d8ef9eafa35cfd861
+SHA1 - 7faf30566461515e3f6c8f03cecd99c914031091
+MD5 - e58e01c27d64dce8b3f54881432d3b20
+
+[*] File Architecture: i386 (32-bit x86)
+[*] Output strings to strings/samples/andromeda_sample_strings.txt
+
++-----------------+
+| Packer/Compiler |
++-----------------+
+MS Visual C++ v6.0
+
++-----------------+
+|    Sections     |
++-----------------+
+Name	VirtualSize	VirtualAddress	SizeOfRawData	PointerToRawData
+.text	2460		4096		2560		1024
+.rdata	1284		8192		1536		3584
+.data	1756		12288		2048		5120
+.rsrc	436		16384		512		7168
+.reloc	412		20480		512		7680

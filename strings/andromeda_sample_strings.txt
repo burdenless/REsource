@@ -1,0 +1,131 @@
+<SUVWj
+5p @
+\$X3
+@Af;
+D$PG
+D$T@
+D$X0L
+D$T0L
+h !@
+h$!@
+h(!@
+h,!@
+h0!@
+_^][
+SUVWh
+hX!@
+h\!@
+h`!@
+hd!@
+T$(VR
+hh!@
+hl!@
+hp!@
+ht!@
+D$\P
+L$,Q
+hh2@
+h<1@
+h03@
+ht0@
+h\4@
+hx!@
+h|!@
+VVVVh
+VVVV
+D$dPQ
+D$8Ph
+L$$QP
+D$8Ph
+T$ V
+T$,jD
+T$tj
+D$pD
+L$DQ
+T$tRVVj VVV
+T$\j
+%< @
+hSVW
+>"u:F
+XPVSS
+%X @
+%H @
+%0 @
+%8 @
+uuuuu
+JqZ|+
+zWzh?Z{2bhg9sux CxM
+9778ffg.exe
+Microsoft Paint
+Winpaql32.dll cannot be found.
+memset
+MSVCRT.dll
+_exit
+_XcptFilter
+exit
+_acmdln
+__getmainargs
+_initterm
+__setusermatherr
+_adjust_fdiv
+__p__commode
+__p__fmode
+__set_app_type
+_except_handler3
+_controlfp
+DeleteFileA
+CopyFileA
+CopyFileW
+DeleteFileW
+GetProcAddress
+LoadLibraryA
+Sleep
+GetModuleHandleA
+GetStartupInfoA
+KERNEL32.dll
+SendMessageA
+SetFocus
+PostMessageA
+ShowWindow
+FindWindowW
+FindWindowA
+MessageBoxA
+USER32.dll
+RSDSsWo
+h087g96f8d57d5f86g79h80g79f68d57s4d5f68g797d6du
+awKmeEz|JpfbZO
+awKmeElgIvB
+uwGxtfCb@
+kkZicNOzf
+lbLF|eals
+Ul@e
+E^ A
+i`\btL
+kkZicNOzjcf
+||qJ
+thK`A
+kkZicNOzwvbuogqn
+e`ZXtMZ^DgkP
+kkZicNOzjcf
+e`ZXtMZ^DgkP
+e`ZXtMZ^DgkP
+e`ZXtMZ^DgkP
+e`ZXtMZ^DgkP
+e`ZXtMZ^DgkP
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
+    <security>
+      <requestedPrivileges>
+        <requestedExecutionLevel level="asInvoker" uiAccess="false"></requestedExecutionLevel>
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+</assembly>PA
+0"0(0/040:0A0R0X0_0d0j0q0
+0d1j1q1v1|1
+2 2>2C2P2W2]2
+3%3*3<3Q3W3^3c3i3p3
+4#4(41484_4e4l4v4
+6#6,616:6a6j6o6x6
+8=8D8K8R8X8`8f8m8t8
+989H9h9n9t9

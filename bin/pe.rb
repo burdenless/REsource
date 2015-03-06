@@ -70,7 +70,13 @@ iatban
                         count += 1
 			puts par['module_name']
 			while parcount < par.length
-				puts par[parcount]
+				imports = par[parcount].to_json
+				puts imports
+				#while icount < imports.length
+				#	puts imports[icount]
+				#	icount += 1
+				#end
+				#icount = 0
 				parcount +=1
 			end
 			parcount = 0
