@@ -22,3 +22,40 @@ Name	VirtualSize	VirtualAddress	SizeOfRawData	PointerToRawData
 .data	1756		12288		2048		5120
 .rsrc	436		16384		512		7168
 .reloc	412		20480		512		7680
+
++----------------+
+|    Imports     |
++----------------+
+
+MSVCRT.dll
+============
+__p__commode
+_controlfp
+memset
+_adjust_fdiv
+__setusermatherr
+
+KERNEL32.dll
+============
+DeleteFileA
+GetStartupInfoA
+GetModuleHandleA
+Sleep
+LoadLibraryA
+GetProcAddress
+DeleteFileW
+CopyFileW
+
+USER32.dll
+============
+SetFocus
+PostMessageA
+ShowWindow
+FindWindowW
+FindWindowA
+MessageBoxA
+SendMessageA
+
+[+] Link: https://www.virustotal.com/file/d0f7018d02e70fabbe0e64e92c7dc9b8e0c748326668732d8ef9eafa35cfd861/analysis/1425569945/
+[+] Detection Ratio: 34/57
+[+] Analysis complete!

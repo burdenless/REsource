@@ -46,7 +46,7 @@ secban
 			count += 1
 		end
 	rescue
-		output = 'Error. Could not parse IAT'
+		output = 'Error. Could not parse Sections'
 	end
 	File.open("reports/#{name}.txt", "a") do |f1| f1.write(output) end
 
@@ -58,32 +58,31 @@ secban
 |    Imports     |
 +----------------+
 iatban
-	#begin
+	begin
+		File.open("reports/#{name}.txt", "a") do |f1| f1.write(iatban) end
+		output = ''
 		data = pe.imports(fi)		
 		imports = data.to_json
                 parsed = JSON.parse(imports, :create_additions => true)
                 count = 0
-                output = ''
-		parcount = 0
+		parcount = 3
                 while count < parsed.length
                         par = parsed[count]
                         count += 1
-			puts par['module_name']
+			output += "\n#{par['module_name']}\n============\n"
+			imports = par[6]
 			while parcount < par.length
-				imports = par[parcount].to_json
-				puts imports
-				#while icount < imports.length
-				#	puts imports[icount]
-				#	icount += 1
-				#end
-				#icount = 0
-				parcount +=1
+				output += "#{imports[parcount]['name']}\n"
+				parcount += 1
 			end
 			parcount = 0
 	  	end
-	#rescue
-	#	puts 'error'
-	#end
+	rescue
+		print '[-]'.red
+		puts ' Error during IAT parsing'
+	end
+
+	File.open("reports/#{name}.txt", "a") do |f1| f1.write(output) end	
 
 end
 
