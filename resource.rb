@@ -2,7 +2,7 @@
 ##
 #
 # Tool for initial malware triage
-# Developer: Y0xda
+# Developer: Byt3smith
 #
 ##
 
